@@ -5,16 +5,29 @@ from scrapy.spiders import CrawlSpider, Rule
 
 class MoviespiderSpider(CrawlSpider):
     name = 'movieSpider'
-    allowed_domains = ['https://www.allocine.fr/film/meilleurs/']
-    start_urls = ['http://https://www.allocine.fr/film/meilleurs//']
+    allowed_domains = ['www.allocine.fr']
+    start_urls = ['https://www.allocine.fr/film/meilleurs/']
 
     rules = (
-        Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=r'meilleurs/'), callback='parse_item', follow=True),
     )
 
     def parse_item(self, response):
-        item = {}
+
         #item['domain_id'] = response.xpath('//input[@id="sid"]/@value').get()
         #item['name'] = response.xpath('//div[@id="name"]').get()
         #item['description'] = response.xpath('//div[@id="description"]').get()
-        return item
+        movie_title = response.css('a.meta-title-link::text')
+
+        # [title.get() for title in movie_title]
+
+        for title in movie_title:
+            yield {
+                'movie_title' : title.get()
+            }
+
+        #     # next_page = response.css('li.next a::attr(href)').get()
+        #     # if next_page is not None:
+        #     #     next_page = response.urljoin(next_page)
+        #     #     yield scrapy.Request(next_page, callback=self.parse)
+
