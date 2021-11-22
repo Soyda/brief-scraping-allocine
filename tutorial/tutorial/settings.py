@@ -86,3 +86,6 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+DOWNLOAD_DELAY = .25 # increase the delay between requests
+RANDOMIZE_DOWNLOAD_DELAY = True # randomize the delay to look more human
