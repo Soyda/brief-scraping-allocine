@@ -1,1 +1,1 @@
-[B# Learning Scrapy by scraping allocine.fr
+# Learning Scrapy by scraping allocine.fr
