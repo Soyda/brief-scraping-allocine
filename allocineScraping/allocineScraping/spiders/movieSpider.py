@@ -27,11 +27,11 @@ class MoviespiderSpider(CrawlSpider):
         item['type'] = response.xpath('//a[@class="GenresAndPlot__GenreChip-cum89p-3 fzmeux ipc-chip ipc-chip--on-baseAlt"]/span/text()').getall()
         item['release_date'] = response.xpath('//span[@class="TitleBlockMetaData__ListItemText-sc-12ein40-2 jedhex"]/text()')[0].get()
         item['duration'] = "".join(response.xpath('//li[@data-testid="title-techspec_runtime"]/div[@class="ipc-metadata-list-item__content-container"]/text()').getall())
-        # item['resume'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get()
+        item['resume'] = response.xpath('//div[@class="ipc-html-content ipc-html-content--base"]/div/text()').get()
         item['top_cast'] = response.xpath('//a[@data-testid="title-cast-item__actor"]/text()').getall()
         item['audience'] = response.xpath('//span[@class="TitleBlockMetaData__ListItemText-sc-12ein40-2 jedhex"]/text()')[1].get()
-        # item['country'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get()
-        # item['original_language'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get()
+        item['country'] = response.xpath('//a[contains(@href, "?country_of_origin")]/text()').getall()
+        item['original_language'] = response.xpath('//a[contains(@href, "primary_language")]/text()').getall()
 
         return item
 
