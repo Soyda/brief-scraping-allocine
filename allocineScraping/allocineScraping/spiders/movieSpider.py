@@ -22,7 +22,7 @@ class MoviespiderSpider(CrawlSpider):
         item = {}
 
         item['title'] = response.xpath('//h1/text()').get()
-        item['original_title'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get()
+        item['original_title'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get().replace('Original title: ', '')
         item['score'] = response.xpath('//div[@data-testid="hero-rating-bar__aggregate-rating__score"]/span/text()').get()
         item['type'] = response.xpath('//a[@class="GenresAndPlot__GenreChip-cum89p-3 fzmeux ipc-chip ipc-chip--on-baseAlt"]/span/text()').getall()
         item['release_date'] = response.xpath('//span[@class="TitleBlockMetaData__ListItemText-sc-12ein40-2 jedhex"]/text()')[0].get()
@@ -34,5 +34,3 @@ class MoviespiderSpider(CrawlSpider):
         item['original_language'] = response.xpath('//a[contains(@href, "primary_language")]/text()').getall()
 
         return item
-
-    # response.xpath('//td[@class="titleColumn"]/a/text()').getall() get titles of movies on top250 page
