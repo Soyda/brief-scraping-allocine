@@ -1,0 +1,13 @@
+class pour imdb :
+title
+original_title
+score
+type (genre)
+date
+time (durée)
+descriptions (synopsis)
+actors
+
+public
+country
+langue d'origine
