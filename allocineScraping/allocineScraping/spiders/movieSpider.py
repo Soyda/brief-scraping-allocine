@@ -22,7 +22,11 @@ class MoviespiderSpider(CrawlSpider):
         movie = {}
 
         movie['title'] = response.xpath('//h1/text()').get()
-        movie['original_title'] = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()').get().replace('Original title: ', '')
+
+        original_title = response.xpath('//div[@data-testid="hero-title-block__original-title"]/text()')
+        if original_title != [] :
+            movie['original_title'] = original_title.get().replace('Original title: ', '')
+        
         movie['score'] = response.xpath('//div[@data-testid="hero-rating-bar__aggregate-rating__score"]/span/text()').get()
         movie['type'] = response.xpath('//a[@class="GenresAndPlot__GenreChip-cum89p-3 fzmeux ipc-chip ipc-chip--on-baseAlt"]/span/text()').getall()
         movie['release_date'] = response.xpath('//span[@class="TitleBlockMetaData__ListItemText-sc-12ein40-2 jedhex"]/text()')[0].get()
